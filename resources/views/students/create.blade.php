@@ -4,8 +4,21 @@
 <div class="container">
 
     <h1>Create a Student</h1>
-    <form class="form" method="POST" action="{{ route('students.store') }}">
+    <form class="form" method="POST" action="{{ route('students.store') }}" enctype="multipart/form-data">
         {!! csrf_field() !!}
+        <div class="form-group">
+            <label>
+                Perfil image:
+            </label>
+            <input type="file" name="image" value="{{ old('image') }}" />
+            @if ($errors->has('image'))
+                <div class="alert alert-danger">
+                    <ul>
+                        {{ $errors->first('image') }}
+                    </ul>
+                </div>
+            @endif
+        </div>
         <div class="form-group">
             <label for="name">
                 *Name:

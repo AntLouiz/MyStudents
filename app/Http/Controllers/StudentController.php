@@ -43,8 +43,12 @@ class StudentController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:60',
             'age' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif'
         ]);
+
+        $file = $request->file('image');
+        $file->move('images/students', $file->getClientOriginalName());
 
         $student->name = $request->input('name');
         $student->age = $request->input('age');
@@ -55,7 +59,7 @@ class StudentController extends Controller
 
         return \Redirect::route(
             'students.index'
-        )->with('message', 'Your category has been created!');
+        )->with('message', "Student ".$student->name." has been created!");
     }
 
     /**
