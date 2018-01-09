@@ -36,6 +36,12 @@
                         >
                           Update
                         </a>
+                        <a 
+                          href="{{ route('students.update', $student) }}"
+                          class="btn btn-danger"
+                        >
+                          Delete
+                        </a>
                       </div>
                     </div>
               @endforeach
