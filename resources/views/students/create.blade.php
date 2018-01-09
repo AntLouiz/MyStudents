@@ -1,36 +1,89 @@
 @extends('base')
 
 @section('content')
-<h1>Create a Student</h1>
+<div class="container">
 
-<form class="form" method="POST" action="{{ route('students.store') }}">
-    {!! csrf_field() !!}
-    <div class="form-group">
-        <label>
-            Name:
-        </label>
-        <input class="form-control" type="text" name="name"/>
-    </div>
+    <h1>Create a Student</h1>
+    <form class="form" method="POST" action="{{ route('students.store') }}">
+        {!! csrf_field() !!}
+        <div class="form-group">
+            <label for="name">
+                *Name:
+            </label>
+            <input 
+                class="form-control" 
+                type="text" 
+                name="name"
+                value="{{old('name')}}"
+            />
+            @if ($errors->has('name'))
+                <div class="alert alert-danger">
+                    <ul>
+                        {{ $errors->first('name') }}
+                    </ul>
+                </div>
+            @endif
+        </div>
 
-    <div class="form-group">
-        <label>
-            Age:
-        </label>
-        <input class="form-control" type="number" name="age"/>
-    </div>
+        <div class="form-group">
+            <label>
+                *Age:
+            </label>
+            <input 
+                class="form-control" 
+                type="number" 
+                name="age"
+                value="{{old('age')}}"
+            />
+            @if ($errors->has('age'))
+                <div class="alert alert-danger">
+                    <ul>
+                        {{ $errors->first('age') }}
+                    </ul>
+                </div>
+            @endif
+        </div>
 
-    <div class="form-group">
-        <label>
-            Email:
-        </label>
-        <input class="form-control" type="email" name="email"/>
-    </div>
-    <div class="form-group">
-        <label>
-            Address:
-        </label>
-        <input class="form-control" type="text" name="Address"/>
-    </div>
-    <button type="submit" class="btn btn-success">Create</button>
-</form>
+        <div class="form-group">
+            <label>
+                *Email:
+            </label>
+            <input 
+                class="form-control" 
+                type="email" 
+                name="email"
+                value="{{old('email')}}"
+            />
+            @if ($errors->has('email'))
+                <div class="alert alert-danger">
+                    <ul>
+                        {{ $errors->first('email') }}
+                    </ul>
+                </div>
+            @endif
+        </div>
+        <div class="form-group">
+            <label>
+                Address:
+            </label>
+            <input 
+                class="form-control" 
+                type="text" 
+                name="address"
+                value="{{old('address')}}"
+            />
+            @if ($errors->has('address'))
+                <div class="alert alert-danger">
+                    <ul>
+                        {{ $errors->first('address') }}
+                    </ul>
+                </div>
+            @endif
+        </div>
+        <div class="float-right">
+            <button type="submit" class="btn btn-success">Create</button>
+        </div>
+        
+    </form>
+</div>
 @endsection

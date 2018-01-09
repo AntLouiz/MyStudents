@@ -40,6 +40,12 @@ class StudentController extends Controller
     {
         $student = new Student;
 
+        $validatedData = $request->validate([
+            'name' => 'required|max:60',
+            'age' => 'required',
+            'email' => 'required|email'
+        ]);
+
         $student->name = $request->input('name');
         $student->age = $request->input('age');
         $student->email = $request->input('email');
