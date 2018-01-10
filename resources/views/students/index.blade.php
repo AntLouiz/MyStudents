@@ -9,7 +9,8 @@
           margin: 7px;
     }
     .card-img-top{
-          width: 6em;
+          width: 4em;
+          height: 4em;
           border-radius: 100%;
     }
   </style>
@@ -24,7 +25,11 @@
               @foreach ($students as $student)
               
                     <div class="card col-md-2">
-                      <img class="card-img-top" src="{{ asset('images/default_avatar.png') }}" alt="Card image cap">
+                      @if ($student->image_url)
+                        <img class="card-img-top" src="{{ asset('images/students/'.$student->image_url) }}" alt="Card image cap">
+                      @else
+                        <img class="card-img-top" src="{{ asset('images/default_avatar.png') }}" alt="Card image cap">
+                      @endif
                       <div class="card-body">
                         <h5 class="card-title">{{$student->name}}</h5>
                         <p class="card-text">

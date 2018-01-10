@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use App\Events\StudentAdded;
 use Image;
 
 class StudentController extends Controller
@@ -51,26 +52,29 @@ class StudentController extends Controller
         $image = $request->file('image');
         $dest_path =  public_path('images/students');
 
-        $image_name = str_slug(strtolower($image->getClientOriginalName()));
+        $image_name = time().'_'.str_slug($request->input('name'));
         $image_name = $image_name.'.'.$image->getClientOriginalExtension();
 
         $image_object = Image::make(
             $image->getRealPath(), array(
-                'width' => 100,
-                'height' => 100,
+                'width' => 300,
+                'height' => 300,
                 'grayscale' => false
         ));
 
         $image_object->save($dest_path.'/'.$image_name);
 
-        $image->move($dest_path, $image);
+        $image->move($dest_path, $image_name);
 
         $student->name = $request->input('name');
         $student->age = $request->input('age');
         $student->email = $request->input('email');
         $student->address = $request->input('address');
+        $student->image_url = $image_name;
 
         $student->save();
+
+        event(new StudentAdded($student));
 
         return \Redirect::route(
             'students.index'
