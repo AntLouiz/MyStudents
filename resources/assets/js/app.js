@@ -14,15 +14,7 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
+Vue.component('notification-bell', require('./components/NotificationBell'));
 const app = new Vue({
     el: '#app',
-    created() {
-      Echo.channel('channelDemoEvent')
-        .listen('eventTrigger', (e) => {
-          alert("The event trigger has been triggered.");
-        })
-    }
 });

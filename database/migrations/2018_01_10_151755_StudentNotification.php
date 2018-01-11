@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentsAddress extends Migration
+class StudentNotification extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateStudentsAddress extends Migration
      */
     public function up()
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->string('address')->nullable(true);
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->string('desc');
         });
     }
 
@@ -25,7 +27,7 @@ class CreateStudentsAddress extends Migration
      */
     public function down()
     {
-        Schema::table('students', function (Blueprint $table) {
+        Schema::table('notifications', function (Blueprint $table) {
             //
         });
     }

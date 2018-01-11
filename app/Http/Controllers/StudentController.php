@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
-use App\Events\StudentAdded;
+use App\StudentNotification;
+use App\Events\StudentNotification as Notification;
 use Image;
 
 class StudentController extends Controller
@@ -74,7 +75,13 @@ class StudentController extends Controller
 
         $student->save();
 
-        event(new StudentAdded($student));
+        $notification = new StudentNotification;
+
+        $notification->title = 'A new student added.';
+        $notification->desc = 'Student: '.$student->name;
+
+        $notification->save();
+        event(new Notification($student));
 
         return \Redirect::route(
             'students.index'

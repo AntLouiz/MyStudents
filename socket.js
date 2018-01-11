@@ -6,7 +6,7 @@ io.origins('*:*');
 
 var Redis = require('ioredis');
 var redis = Redis.createClient();
-redis.subscribe('student-channel', function(err, count) {
+redis.subscribe('notifications-channel', function(err, count) {
   // body...
 });
 
