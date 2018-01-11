@@ -1,5 +1,22 @@
 <template>
-  <a href="#" v-on:click="showNotification"><span class="glyphicon glyphicon-bell"></span></a>
+  <div class="dropdown">
+    <a 
+      href="#" 
+      v-on:click="showNotification"
+      class="btn dropdown-toggle"
+      type="button"
+      id="notificationDropdown"
+      data-toggle="dropdown"
+    >
+      <span class="glyphicon glyphicon-bell"></span>
+      <span v-if="total !== null" class="total-notifications">
+              {{ total }}
+      </span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="notificationDropdown">
+      <notification></notification>
+    </div>
+  </div>
 </template>
 <style type="text/css">
   .glyphicon-bell{
@@ -11,18 +28,20 @@
   export default {
     data (){
       return {
-        notifications: {
-          title: null,
-          desc: null
-        }
+        notifications: [],
+        total: null,
+        errors: []
       }
     },
     created (){
       this.connectToSocket()
+      this.getNotifications()
     },
     methods: {
           showNotification: function (){
-            alert("notification");
+            this.notifications.map(function(notification, key){
+              console.log(notification.desc);
+            })
           },
           connectToSocket: function (){
             let socket = io.connect('http://localhost:3000');
@@ -31,11 +50,12 @@
               $('.glyphicon-bell').css('color', '#bf5329');
             });
           },
-          checkNotifications: function(){
-             axios.get(`http://jsonplaceholder.typicode.com/posts`)
+          getNotifications: function(){
+             axios.get(`http://localhost:8000/api/notifications`)
               .then(response => {
                 // JSON responses are automatically parsed.
-                this.posts = response.data
+                this.notifications = response.data;
+                this.total = this.notifications.length;
               })
               .catch(e => {
                 this.errors.push(e)

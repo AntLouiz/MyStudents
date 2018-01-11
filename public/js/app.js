@@ -48332,23 +48332,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      notifications: {
-        title: null,
-        desc: null
-      }
+      notifications: [],
+      total: null,
+      errors: []
     };
   },
   created: function created() {
     this.connectToSocket();
+    this.getNotifications();
   },
 
   methods: {
     showNotification: function showNotification() {
-      alert("notification");
+      this.notifications.map(function (notification, key) {
+        console.log(notification.desc);
+      });
     },
     connectToSocket: function connectToSocket() {
       var socket = io.connect('http://localhost:3000');
@@ -48357,12 +48376,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $('.glyphicon-bell').css('color', '#bf5329');
       });
     },
-    checkNotifications: function checkNotifications() {
+    getNotifications: function getNotifications() {
       var _this = this;
 
-      axios.get('http://jsonplaceholder.typicode.com/posts').then(function (response) {
+      axios.get('http://localhost:8000/api/notifications').then(function (response) {
         // JSON responses are automatically parsed.
-        _this.posts = response.data;
+        _this.notifications = response.data;
+        _this.total = _this.notifications.length;
       }).catch(function (e) {
         _this.errors.push(e);
       });
@@ -48378,11 +48398,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "a",
-    { attrs: { href: "#" }, on: { click: _vm.showNotification } },
-    [_c("span", { staticClass: "glyphicon glyphicon-bell" })]
-  )
+  return _c("div", { staticClass: "dropdown" }, [
+    _c(
+      "a",
+      {
+        staticClass: "btn dropdown-toggle",
+        attrs: {
+          href: "#",
+          type: "button",
+          id: "notificationDropdown",
+          "data-toggle": "dropdown"
+        },
+        on: { click: _vm.showNotification }
+      },
+      [
+        _c("span", { staticClass: "glyphicon glyphicon-bell" }),
+        _vm._v(" "),
+        _vm.total !== null
+          ? _c("span", { staticClass: "total-notifications" }, [
+              _vm._v("\n            " + _vm._s(_vm.total) + "\n    ")
+            ])
+          : _vm._e()
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "dropdown-menu",
+        attrs: { "aria-labelledby": "notificationDropdown" }
+      },
+      [_c("notification")],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
