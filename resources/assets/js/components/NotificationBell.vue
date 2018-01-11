@@ -14,7 +14,14 @@
       </span>
     </a>
     <div class="dropdown-menu" aria-labelledby="notificationDropdown">
-      <notification></notification>
+      <notification
+        v-for="notification in notifications"
+        key="notification.title"
+        v-bind:title="notification.title"
+        v-bind:desc="notification.desc"
+      >
+        
+      </notification>
     </div>
   </div>
 </template>
@@ -25,7 +32,12 @@
   }
 </style>
 <script type="text/javascript">
+  import Notification from './Notification'
+
   export default {
+    components: {
+      notification: Notification
+    },
     data (){
       return {
         notifications: [],

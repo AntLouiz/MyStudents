@@ -15,6 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 Vue.component('notification-bell', require('./components/NotificationBell'));
+// Vue.component('notification', require('./components/Notifications'));
+
 const app = new Vue({
     el: '#app',
 });
