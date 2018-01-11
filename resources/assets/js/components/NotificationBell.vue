@@ -1,8 +1,7 @@
 <template>
   <div class="dropdown">
     <a 
-      href="#" 
-      v-on:click="showNotification"
+      href="#"
       class="btn dropdown-toggle"
       type="button"
       id="notificationDropdown"
@@ -15,10 +14,11 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="notificationDropdown">
       <notification
-        v-for="notification in notifications"
-        key="notification.title"
+        v-for="(notification, key) in notifications"
+        v-bind:key="key"
         v-bind:title="notification.title"
         v-bind:desc="notification.desc"
+        v-bind:Ischecked="notification.checked"
       >
         
       </notification>
@@ -50,28 +50,32 @@
       this.getNotifications()
     },
     methods: {
-          showNotification: function (){
-            this.notifications.map(function(notification, key){
-              console.log(notification.desc);
-            })
-          },
           connectToSocket: function (){
             let socket = io.connect('http://localhost:3000');
 
             socket.on('notifications-channel:student-notification', (notification) => {
-              $('.glyphicon-bell').css('color', '#bf5329');
+              this.setNotifications(notification);
             });
+          },
+          setNotifications: function(notification){
+            this.notifications.push(notification)
+            this.setTotal();
+            $('.glyphicon-bell').css('color', '#bf5329');
           },
           getNotifications: function(){
              axios.get(`http://localhost:8000/api/notifications`)
               .then(response => {
                 // JSON responses are automatically parsed.
                 this.notifications = response.data;
-                this.total = this.notifications.length;
+                this.setTotal();
               })
               .catch(e => {
                 this.errors.push(e)
               });
+          },
+          setTotal: function(){
+              console.log(this.notifications);
+              this.total = this.notifications.length
           }
     }
   }

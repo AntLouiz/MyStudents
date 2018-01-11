@@ -48362,28 +48362,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    showNotification: function showNotification() {
-      this.notifications.map(function (notification, key) {
-        console.log(notification.desc);
-      });
-    },
     connectToSocket: function connectToSocket() {
+      var _this = this;
+
       var socket = io.connect('http://localhost:3000');
 
       socket.on('notifications-channel:student-notification', function (notification) {
-        $('.glyphicon-bell').css('color', '#bf5329');
+        _this.setNotifications(notification);
       });
     },
+    setNotifications: function setNotifications(notification) {
+      this.notifications.push(notification);
+      this.setTotal();
+      $('.glyphicon-bell').css('color', '#bf5329');
+    },
     getNotifications: function getNotifications() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('http://localhost:8000/api/notifications').then(function (response) {
         // JSON responses are automatically parsed.
-        _this.notifications = response.data;
-        _this.total = _this.notifications.length;
+        _this2.notifications = response.data;
+        _this2.setTotal();
       }).catch(function (e) {
-        _this.errors.push(e);
+        _this2.errors.push(e);
       });
+    },
+    setTotal: function setTotal() {
+      console.log(this.notifications);
+      this.total = this.notifications.length;
     }
   }
 });
@@ -48406,8 +48412,7 @@ var render = function() {
           type: "button",
           id: "notificationDropdown",
           "data-toggle": "dropdown"
-        },
-        on: { click: _vm.showNotification }
+        }
       },
       [
         _c("span", { staticClass: "glyphicon glyphicon-bell" }),
@@ -48426,10 +48431,14 @@ var render = function() {
         staticClass: "dropdown-menu",
         attrs: { "aria-labelledby": "notificationDropdown" }
       },
-      _vm._l(_vm.notifications, function(notification) {
+      _vm._l(_vm.notifications, function(notification, key) {
         return _c("notification", {
-          key: "notification.title",
-          attrs: { title: notification.title, desc: notification.desc }
+          key: key,
+          attrs: {
+            title: notification.title,
+            desc: notification.desc,
+            Ischecked: notification.checked
+          }
         })
       })
     )
@@ -48531,7 +48540,7 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, "\n.notification{\n  width: 15em;\n  padding: 1em;\n  background: #56ce5a;\n  color: white;\n  cursor: pointer;\n  font-size: 15px;\n  margin-bottom: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.notification{\n  width: 15em;\n  padding: 1em;\n  background: #56ce5a;\n  color: white;\n  cursor: pointer;\n  font-size: 15px;\n  margin-bottom: 5px;\n}\n.checked{\n  background: gray;\n}\n", ""]);
 
 // exports
 
@@ -48559,9 +48568,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['title', 'desc'],
+  props: ['title', 'desc', 'Ischecked'],
   data: function data() {
     return {};
   }
@@ -48575,9 +48588,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "notification" }, [
-    _vm._v("\n  " + _vm._s(_vm.title) + "\n  " + _vm._s(_vm.desc) + "\n")
-  ])
+  return _c(
+    "div",
+    { staticClass: "notification", class: { checked: _vm.Ischecked } },
+    [_vm._v("\n  " + _vm._s(_vm.title) + "\n  " + _vm._s(_vm.desc) + "\n")]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

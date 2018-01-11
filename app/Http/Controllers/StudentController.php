@@ -79,6 +79,7 @@ class StudentController extends Controller
 
         $notification->title = 'A new student added.';
         $notification->desc = 'Student: '.$student->name;
+        $notification->checked = 0;
 
         $notification->save();
         event(new Notification($student));

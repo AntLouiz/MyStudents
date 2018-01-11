@@ -1,5 +1,5 @@
 <template>
-  <div class="notification">
+  <div class="notification" v-bind:class="{ checked: Ischecked}">
     {{title}}
     {{desc}}
   </div>
@@ -14,10 +14,14 @@
     font-size: 15px;
     margin-bottom: 5px;
   }
+
+  .checked{
+    background: gray;
+  }
 </style>
 <script type="text/javascript">
   export default {
-    props: ['title', 'desc'],
+    props: ['title', 'desc', 'Ischecked'],
     data (){
       return {
 
