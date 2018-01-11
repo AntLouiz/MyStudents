@@ -18,7 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/notifications/count', function(){
+  return StudentNotification::where('checked', 0)->count();
+});
 
 Route::get('/notifications', function() {
-  return StudentNotification::all();
+  return StudentNotification::where('checked', 0)->get();
 });
