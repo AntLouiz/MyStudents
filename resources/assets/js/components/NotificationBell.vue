@@ -73,6 +73,13 @@
                 this.errors.push(e)
               });
           },
+          checkNotifications: function(){
+            console.log("heu")
+            axios.put('http://localhost:8000/api/check/notifications', this.notifications)
+            .then(response => {
+              console.log(response.data);
+            })
+          },
           setTotal: function(){
               this.total = this.notifications.length
           }
