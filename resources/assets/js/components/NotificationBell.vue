@@ -74,7 +74,6 @@
               });
           },
           setTotal: function(){
-              console.log(this.notifications);
               this.total = this.notifications.length
           }
     }
