@@ -1,19 +1,6 @@
 @extends('base')
 
 @section('content')
-  <style type="text/css">
-    .card{
-          width: 26rem;
-          border: solid #4a549c;
-          padding: 1em;
-          margin: 7px;
-    }
-    .card-img-top{
-          width: 4em;
-          height: 4em;
-          border-radius: 100%;
-    }
-  </style>
   <div>
     <div class="container center">
       @if(session()->has('message'))
@@ -28,7 +15,7 @@
                       @if ($student->image_url)
                         <img class="card-img-top" src="{{ asset('images/students/'.$student->image_url) }}" alt="Card image cap">
                       @else
-                        <img class="card-img-top" src="{{ asset('images/default_avatar.png') }}" alt="Card image cap">
+                        <img class="card-img" src="{{ asset('images/default_avatar.png') }}" alt="Card image cap">
                       @endif
                       <div class="card-body">
                         <h5 class="card-title">{{$student->name}}</h5>

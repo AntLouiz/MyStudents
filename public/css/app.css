@@ -8350,3 +8350,16 @@ button.close {
   }
 }
 
+.card {
+  width: 26rem;
+  border: solid #4a549c;
+  padding: 1em;
+  margin: 7px;
+}
+
+.card-img-top {
+  width: 2em;
+  height: 2em;
+  border-radius: 100%;
+}
+
