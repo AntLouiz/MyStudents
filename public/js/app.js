@@ -48342,6 +48342,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -48352,7 +48358,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       notifications: [],
-      total: null,
       errors: []
     };
   },
@@ -48373,28 +48378,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     setNotifications: function setNotifications(notification) {
       this.notifications.push(notification);
-      this.setTotal();
       $('.glyphicon-bell').css('color', '#bf5329');
     },
     getNotifications: function getNotifications() {
       var _this2 = this;
 
       axios.get('http://localhost:8000/api/notifications').then(function (response) {
-        // JSON responses are automatically parsed.
-        _this2.notifications = response.data;
-        _this2.setTotal();
+        if (response.data.length) {
+          _this2.notifications = response.data;
+        }
       }).catch(function (e) {
         _this2.errors.push(e);
       });
     },
     checkNotifications: function checkNotifications() {
-      console.log("heu");
-      axios.put('http://localhost:8000/api/check/notifications', this.notifications).then(function (response) {
-        console.log(response.data);
-      });
-    },
-    setTotal: function setTotal() {
-      this.total = this.notifications.length;
+      var _this3 = this;
+
+      if (this.notifications.length) {
+        axios.put('http://localhost:8000/api/check/notifications', this.notifications).then(function (response) {
+          _this3.notifications = response.data;
+        });
+      }
     }
   }
 });
@@ -48567,6 +48571,11 @@ var render = function() {
           type: "button",
           id: "notificationDropdown",
           "data-toggle": "dropdown"
+        },
+        on: {
+          click: function($event) {
+            _vm.checkNotifications()
+          }
         }
       },
       [
@@ -48586,16 +48595,21 @@ var render = function() {
         staticClass: "dropdown-menu",
         attrs: { "aria-labelledby": "notificationDropdown" }
       },
-      _vm._l(_vm.notifications, function(notification, key) {
-        return _c("notification", {
-          key: key,
-          attrs: {
-            title: notification.title,
-            desc: notification.desc,
-            Ischecked: notification.checked
-          }
-        })
-      })
+      [
+        _vm.notifications.length
+          ? _vm._l(_vm.notifications, function(notification, key) {
+              return _c("notification", {
+                key: key,
+                attrs: {
+                  title: notification.title,
+                  desc: notification.desc,
+                  Ischecked: notification.checked
+                }
+              })
+            })
+          : [_vm._v("\n      Nenhuma notificaçao\n    ")]
+      ],
+      2
     )
   ])
 }
