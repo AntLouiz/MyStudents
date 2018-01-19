@@ -6,6 +6,7 @@
       type="button"
       id="notificationDropdown"
       data-toggle="dropdown"
+      v-on:click="checkNotifications()"
     >
       <span class="glyphicon glyphicon-bell"></span>
       <span v-if="total !== null" class="total-notifications">
@@ -13,15 +14,20 @@
       </span>
     </a>
     <div class="dropdown-menu" aria-labelledby="notificationDropdown">
-      <notification
-        v-for="(notification, key) in notifications"
-        v-bind:key="key"
-        v-bind:title="notification.title"
-        v-bind:desc="notification.desc"
-        v-bind:Ischecked="notification.checked"
-      >
-        
-      </notification>
+      <template v-if="notifications.length">
+        <notification
+          v-for="(notification, key) in notifications"
+          v-bind:key="key"
+          v-bind:title="notification.title"
+          v-bind:desc="notification.desc"
+          v-bind:Ischecked="notification.checked"
+        >
+          
+        </notification>
+      </template>
+      <template v-else>
+        Nenhuma notificaçao
+      </template>
     </div>
   </div>
 </template>
@@ -41,7 +47,6 @@
     data (){
       return {
         notifications: [],
-        total: null,
         errors: []
       }
     },
@@ -59,29 +64,26 @@
           },
           setNotifications: function(notification){
             this.notifications.push(notification)
-            this.setTotal();
             $('.glyphicon-bell').css('color', '#bf5329');
           },
           getNotifications: function(){
              axios.get(`http://localhost:8000/api/notifications`)
               .then(response => {
-                // JSON responses are automatically parsed.
-                this.notifications = response.data;
-                this.setTotal();
+                if (response.data.length) {
+                  this.notifications = response.data;
+                }
               })
               .catch(e => {
                 this.errors.push(e)
               });
           },
           checkNotifications: function(){
-            console.log("heu")
-            axios.put('http://localhost:8000/api/check/notifications', this.notifications)
-            .then(response => {
-              console.log(response.data);
-            })
-          },
-          setTotal: function(){
-              this.total = this.notifications.length
+            if (this.notifications.length) {
+              axios.put('http://localhost:8000/api/check/notifications', this.notifications)
+              .then(response => {
+                this.notifications = response.data;
+              })
+            }
           }
     }
   }
