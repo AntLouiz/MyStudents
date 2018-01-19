@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/notifications', function() {
-  return StudentNotification::where('checked', 0)->get();
+  return StudentNotification::orderBy('id', 'DESC')->get();
 });
 
 Route::put('/check/notifications', 'StudentNotificationController@check');
