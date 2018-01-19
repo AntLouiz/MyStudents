@@ -8363,3 +8363,8 @@ button.close {
   border-radius: 100%;
 }
 
+.dropdown-menu {
+  height: 20em;
+  overflow-y: auto;
+}
+
