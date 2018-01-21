@@ -123,7 +123,16 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id)->first();
+        $student->name = $request->input('name');
+        $student->age = $request->input('age');
+        $student->email = $request->input('email');
+        $student->address = $request->input('address');
+
+        $student->save();
+
+        return view('students/index')
+        ->with('message', "Student ".$student->name." has been updated!");
     }
 
     /**
