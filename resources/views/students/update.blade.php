@@ -10,14 +10,9 @@
             <label>
                 Perfil image:
             </label>
-            <input type="file" name="image" value="{{ old('image') }}" />
-            @if ($errors->has('image'))
-                <div class="alert alert-danger">
-                    <ul>
-                        {{ $errors->first('image') }}
-                    </ul>
-                </div>
-            @endif
+            <div class="form-group">
+                <img class="form-img" src="{{ asset('images/students/'.$student->image_url) }}" alt="Card image cap">
+            </div>
         </div>
         <div class="form-group">
             <label for="name">
@@ -27,7 +22,7 @@
                 class="form-control" 
                 type="text" 
                 name="name"
-                value="{{old('name')}}"
+                value="{{ $student->name }}"
             />
             @if ($errors->has('name'))
                 <div class="alert alert-danger">
@@ -46,7 +41,7 @@
                 class="form-control" 
                 type="number" 
                 name="age"
-                value="{{old('age')}}"
+                value="{{ $student->age }}"
             />
             @if ($errors->has('age'))
                 <div class="alert alert-danger">
@@ -65,7 +60,7 @@
                 class="form-control" 
                 type="email" 
                 name="email"
-                value="{{old('email')}}"
+                value="{{ $student->email }}"
             />
             @if ($errors->has('email'))
                 <div class="alert alert-danger">
@@ -83,7 +78,7 @@
                 class="form-control" 
                 type="text" 
                 name="address"
-                value="{{old('address')}}"
+                value="{{ $student->address }}"
             />
             @if ($errors->has('address'))
                 <div class="alert alert-danger">
