@@ -108,7 +108,10 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id)->first();
+
+        return view('students/update')
+        ->with('student', $student);
     }
 
     /**

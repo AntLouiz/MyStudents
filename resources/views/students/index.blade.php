@@ -23,7 +23,7 @@
                           Email: {{$student->email}}
                         </p>
                         <a 
-                          href="{{ route('students.update', $student) }}"
+                          href="{{ route('students.edit', $student) }}"
                           class="btn btn-primary"
                         >
                           Update
