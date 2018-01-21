@@ -89,7 +89,7 @@
             @endif
         </div>
         <div class="float-right">
-            <button type="submit" class="btn btn-success">Create</button>
+            <button type="submit" class="btn btn-info">Update</button>
         </div>
         
     </form>
