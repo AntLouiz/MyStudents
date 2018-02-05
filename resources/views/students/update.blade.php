@@ -4,7 +4,7 @@
 <div class="container">
 
     <h1>Update the student {{ $student->name }}</h1>
-    <form class="form" method="PATCH" action="{{ route('students.update', $student) }}" enctype="multipart/form-data">
+    <form class="form" method="PUT" action="{{ route('students.update', $student->id) }}" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="form-group">
             <label>
