@@ -22,18 +22,18 @@
                         <p class="card-text">
                           Email: {{$student->email}}
                         </p>
-                        <a 
-                          href="{{ route('students.edit', $student) }}"
-                          class="btn btn-primary"
-                        >
-                          Update
-                        </a>
-                        <a 
-                          href="{{ route('students.update', $student) }}"
-                          class="btn btn-danger"
-                        >
-                          Delete
-                        </a>
+
+                          <a 
+                            href="{{ route('students.edit', $student) }}"
+                            class="btn btn-primary"
+                          >
+                            Update
+                          </a>
+
+                          {{ Form::open(array('route' => array('students.destroy', $student->id), 'method' => 'delete')) }}
+                              <button type="submit" class="btn btn-danger glyphicon glyphicon-trash"></button>
+                          {{ Form::close() }} 
+
                       </div>
                     </div>
               @endforeach
