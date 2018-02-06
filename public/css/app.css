@@ -8374,3 +8374,8 @@ button.close {
   border-radius: 100%;
 }
 
+.navbar {
+  padding: 2em;
+  background: #2d4b95;
+}
+
