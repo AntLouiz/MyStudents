@@ -17,7 +17,7 @@
           <ul class="nav navbar-nav">
               <li>
                 <p class="navbar-btn">
-                    <a href="#" href="{{ url('students/') }}" class="btn">View All Students</a>
+                    <a href="{{ url('students/') }}" class="btn">View All Students</a>
                 </p>
               </li>
               <li>
