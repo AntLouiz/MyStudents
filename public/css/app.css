@@ -8375,7 +8375,21 @@ button.close {
 }
 
 .navbar {
-  padding: 2em;
   background: #2d4b95;
+}
+
+.welcome-block {
+  text-align: center;
+  top: 10em;
+  position: relative;
+  padding: 1em;
+}
+
+.welcome-message {
+  font-size: 30px;
+  padding: 1em;
+  border: solid;
+  border-color: #d7daf0;
+  text-decoration: none;
 }
 

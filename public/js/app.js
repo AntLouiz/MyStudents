@@ -48263,7 +48263,7 @@ exports = module.exports = __webpack_require__(9)(false);
 
 
 // module
-exports.push([module.i, "\n.glyphicon-bell{\n  font-size: 20px;\n  color: gray;\n}\n", ""]);
+exports.push([module.i, "\n.glyphicon-bell{\n  font-size: 20px;\n  color: #e7e4e4;\n}\n", ""]);
 
 // exports
 
