@@ -9,20 +9,30 @@
 </head>
 <body>
 <div class="container" id="app">
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
 
-  <nav class="navbar">
-      <div class="navbar-header">
-          <a class="navbar-brand" href="/">Logo</a>
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">Logo</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li>
+                <p class="navbar-btn">
+                    <a href="#" href="{{ url('students/') }}" class="btn">View All Students</a>
+                </p>
+              </li>
+              <li>
+                <p class="navbar-btn">
+                  <a href="{{ url('students/create') }}" class="btn">Create a Student</a>
+                </p>
+              </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+                <notification-bell></notification-bell>
+            </li>
+          </ul>
       </div>
-      <ul class="nav navbar-nav">
-          <li><a href="{{ url('students/') }}">View All Students</a></li>
-          <a href="{{ url('students/create') }}" class="btn btn-success">Create a Student</a>
-      </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-          <notification-bell></notification-bell>
-      </li>
-    </ul>
   </nav>
   @yield('content')
 </div>
