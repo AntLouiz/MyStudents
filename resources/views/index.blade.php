@@ -4,9 +4,11 @@
 
 <div class="container">
   <div class="row">
-    <h1>
-      Welcome to my first Laravel project
-    </h1>
+      <div class="welcome-block">
+        <a href="{{ url('students/create') }}" class="welcome-message">
+          Manage your students now
+        </a>
+      </div>
   </div>
 </div>
 
