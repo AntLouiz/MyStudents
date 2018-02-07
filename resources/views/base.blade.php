@@ -12,7 +12,7 @@
 
   <nav class="navbar">
       <div class="navbar-header">
-          <a class="navbar-brand">My students</a>
+          <a class="navbar-brand" href="/">Logo</a>
       </div>
       <ul class="nav navbar-nav">
           <li><a href="{{ url('students/') }}">View All Students</a></li>
