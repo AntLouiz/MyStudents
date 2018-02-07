@@ -34,7 +34,7 @@
 <style type="text/css">
   .glyphicon-bell{
     font-size: 20px;
-    color: gray;
+    color: #e7e4e4;
   }
 </style>
 <script type="text/javascript">
