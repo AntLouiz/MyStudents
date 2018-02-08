@@ -8393,3 +8393,9 @@ button.close {
   text-decoration: none;
 }
 
+.form {
+  width: 40%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
