@@ -17,12 +17,7 @@
           <ul class="nav navbar-nav">
               <li>
                 <p class="navbar-btn">
-                    <a href="{{ url('students/') }}" class="btn">View All Students</a>
-                </p>
-              </li>
-              <li>
-                <p class="navbar-btn">
-                  <a href="{{ url('students/create') }}" class="btn">Create a Student</a>
+                    <a href="{{ url('students/') }}" class="btn">All Students</a>
                 </p>
               </li>
           </ul>
@@ -31,6 +26,15 @@
                 <notification-bell></notification-bell>
             </li>
           </ul>
+          <nav class="pull-right">
+             <ul class="nav navbar-nav">
+               <li>
+                <p class="navbar-btn">
+                  <a href="{{ url('students/create') }}" class="btn btn-success">Create a Student</a>
+                </p>
+              </li> 
+            </ul>
+          </nav>
       </div>
   </nav>
   @yield('content')
