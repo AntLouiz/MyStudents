@@ -2,10 +2,9 @@
 
 @section('content')
 <div class="container">
-
-    <h1>Create a Student</h1>
     <form class="form" method="POST" action="{{ route('students.store') }}" enctype="multipart/form-data">
         {!! csrf_field() !!}
+        <h1>Create a Student</h1>
         <div class="form-group">
             <label>
                 Perfil image:
@@ -93,7 +92,7 @@
                 </div>
             @endif
         </div>
-        <div class="float-right">
+        <div class="pull-right">
             <button type="submit" class="btn btn-success">Create</button>
         </div>
         
